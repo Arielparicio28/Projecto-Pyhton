@@ -14,7 +14,7 @@ def alta(tabla):
         provincia = input("Introduce tu provinica")
        
  
-        sql = "INSERT INTO cliente (nombre, apellido, nif_nie, direccion, codigopostal) VALUES (%s, %s,%s,%s,%s,%s)"
+        sql = "INSERT INTO cliente (nombre, apellido, nif_nie, direccion, codigopostal, provincia) VALUES (%s, %s,%s,%s,%s,%s)"
         valores = (nombre, apellido, nif, direccion, codigoPostal, provincia)
         cursor.execute(sql, valores)
         conexion.commit()
@@ -70,19 +70,20 @@ def alta(tabla):
             conexion.commit()
             print("Datos introducidos correctamente.")
 
+#Tabla dirección envio
 
+    elif tabla == "":
+            
+            codigoPosenvio = input("Escriba el codigo de envio ")
+            poblacionenvio = input("Escriba la poblacion de envio: ")
+            provinciaenvio = input("Escriba la provincia de envio: ")
 
-    elif tabla == "4":
-            print("\n--- Alta de Producto ---")
-            descripcionProducto = input("Escriba la descripción del producto: ")
-            cantidad = input("Introduzca la cantidad a comprar: ")
-
-            sql = "INSERT INTO productos (Cantidad, Descripcion) VALUES (%s, %s)"
-            val = (cantidad, descripcionProducto)
+            sql = "INSERT INTO direccionenvio (codigo_postal, poblacion, provincia) VALUES (%s, %s, %s)"
+            val = (codigoPosenvio, poblacionenvio, provinciaenvio )
             conexion.execute(sql, val)
             conexion.commit()
-            print("Dato introducido correctamente.")
- 
+            print("Datos introducidos correctamente.")
+
 
     cursor.close()
     conexion.close()

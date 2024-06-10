@@ -64,7 +64,7 @@ def alta(tabla):
             iban = input("Escriba el número de cuenta: ")
             swift = input("Escriba el código internacional: ")
 
-            sql = "INSERT INTO nombre_entidad_financiera (nombre_entidad, codigo_iban, codigo_swift) VALUES (%s, %s, %s)"
+            sql = "INSERT INTO bancos (nombre_entidad, codigo_iban, codigo_swift) VALUES (%s, %s, %s)"
             val = (nombreBanco, iban, swift)
             conexion.execute(sql, val)
             conexion.commit()

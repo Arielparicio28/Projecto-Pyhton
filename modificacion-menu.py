@@ -1,3 +1,9 @@
+
+
+
+
+
+
 def modificacion(tabla):
     limpiar_pantalla()
     conexion = conectar()

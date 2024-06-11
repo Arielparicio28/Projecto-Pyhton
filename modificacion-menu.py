@@ -3,7 +3,7 @@ def modificacion(tabla):
     conexion = conectar()
     cursor = conexion.cursor()
 
-    if tabla == "Clientes":
+    if tabla == "Clientes": 
         id_cliente = input("Ingrese el ID del cliente a modificar: ")
         nombre = input("Ingrese el nombre del cliente: ")
         apellido = input("Ingrese el apellido del cliente: ")

@@ -29,6 +29,7 @@ def modificacion(tabla):
         codigo = input("Escriba un código postal: ")
         descripcion = input("Escriba una descripción: ")
 
+
         sql = "UPDATE CodigosPostales SET codigo = %s, descripcion = %s WHERE id = %s"
         valores = (codigo, descripcion, id_codigo_postal)
         cursor.execute(sql, valores)

@@ -42,7 +42,7 @@ def baja(tabla):
     # Tabla banco
     elif tabla == "Banco":
         iban = input("Escriba el número de cuenta (IBAN) del banco a eliminar: ")
-        sql = "DELETE FROM nombre_entidad_financiera WHERE codigo_iban = %s"
+        sql = "DELETE FROM bancos WHERE codigo_iban = %s"
         valores = (iban,)
         cursor.execute(sql, valores)
         conexion.commit()

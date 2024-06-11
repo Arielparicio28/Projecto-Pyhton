@@ -216,7 +216,7 @@ ALTER TABLE `poblacion`
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
-  ADD PRIMARY KEY (`codigo_producto`);
+  ADD PRIMARY KEY (`codigo_producto`),
   ADD UNIQUE (`precio_unitario`);
 
 --

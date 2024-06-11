@@ -65,7 +65,7 @@ def calcular_total_general(productos):
     total_general = sum(producto['total'] for producto in productos)
     return total_general, total_general * 1.21  # 21% IVA
 
-def generar_factura():
+def facturacion():
     limpiar_pantalla()
     datos_empresa = obtener_datos_empresa()
     nif_cliente = input("Introduce el NIF/NIE del cliente: ")
@@ -94,4 +94,4 @@ def generar_factura():
     input("\nPresione Enter para continuar...")
 
 # Ejecutar la función para generar la factura
-generar_factura()
+facturacion()

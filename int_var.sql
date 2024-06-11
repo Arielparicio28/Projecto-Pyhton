@@ -249,17 +249,17 @@ ALTER TABLE `factura`
 -- Filtros para la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`cp`) REFERENCES `codigopostal` (`codigo`),
-  ADD CONSTRAINT `cliente_ibfk_2` FOREIGN KEY (`poblacion`) REFERENCES `poblacion` (`codigo`);
-  ADD CONSTRAINT `cliente_ibfk_3` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`codigo`);
+  ADD CONSTRAINT `fk_cp_codigopostal` FOREIGN KEY (`cp`) REFERENCES `codigopostal` (`codigo`),
+  ADD CONSTRAINT `fk_poblacion_poblacion` FOREIGN KEY (`poblacion`) REFERENCES `poblacion` (`codigo`),
+  ADD CONSTRAINT `fk_provincia_provincias` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`codigo`);
 
---
 -- Filtros para la tabla `vendedor`
 --
 ALTER TABLE `vendedor`
-  ADD CONSTRAINT `vendedor_ibfk_1` FOREIGN KEY (`cp`) REFERENCES `codigopostal` (`codigo`),
-  ADD CONSTRAINT `vendedor_ibfk_2` FOREIGN KEY (`poblacion`) REFERENCES `poblacion` (`codigo`);
-  ADD CONSTRAINT `vendedor_ibfk_3` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`codigo`);
+  ADD CONSTRAINT `fk_cp_codigopostal` FOREIGN KEY (`cp`) REFERENCES `codigopostal` (`codigo`),
+  ADD CONSTRAINT `fk_poblacion_poblacion` FOREIGN KEY (`poblacion`) REFERENCES `poblacion` (`codigo`),
+  ADD CONSTRAINT `fk_provincia_provincias` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`codigo`);
+
 
 --
 -- Filtros para la tabla `direccionenvio`

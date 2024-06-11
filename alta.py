@@ -5,7 +5,7 @@ def alta(tabla):
  
  #Tabla Clientes
 
-    if tabla == "Clientes":
+    if tabla == "1":
         nombre = input("Ingrese el nombre del cliente: ")
         apellido = input("Ingrese el apellido del cliente: ")
         nif = input("Introduce tu Nif/Nie ")
@@ -22,7 +22,7 @@ def alta(tabla):
     
     #Tabla codigo postal
 
-    elif tabla == "":
+    elif tabla == "2":
         codigo = input("Escriba un código postal: ")
         descripcion = input("Escriba una descripción: ")
       
@@ -34,7 +34,7 @@ def alta(tabla):
     
 #Tabla poblacion
 
-    elif tabla == "":
+    elif tabla == "3":
         codigoP = input("Escriba un código postal: ")
         descripcionP = input("Escriba una descripción: ")
       
@@ -46,7 +46,7 @@ def alta(tabla):
 
 #Tabla Provincias
 
-    elif tabla == "":
+    elif tabla == "4":
         codigoPro = input("Escriba un código postal: ")
         descripcionPro = input("Escriba una descripción: ")
       
@@ -58,7 +58,7 @@ def alta(tabla):
     
 #Tabla Banco
 
-    elif tabla == "":
+    elif tabla == "5":
             
             nombreBanco = input("Escriba el nombre de su banco: ")
             iban = input("Escriba el número de cuenta: ")
@@ -72,7 +72,7 @@ def alta(tabla):
 
 #Tabla dirección envio
 
-    elif tabla == "":
+    elif tabla == "6":
             
             codigoPosenvio = input("Escriba el codigo de envio ")
             poblacionenvio = input("Escriba la poblacion de envio: ")

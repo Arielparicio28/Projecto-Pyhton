@@ -44,31 +44,28 @@ def menu_mantenimiento():
         limpiar_pantalla()
         print("\nMenú Mantenimiento:")
         print("1. Clientes")
-        print("2. Productos")
-        print("3. Provincias")
-        print("4. Entidades Bancarias")
-        print("5. Códigos Postales")
+        print("2. Codigo Postal")
+        print("3. POblacion")
+        print("4. Provincias")
+        print("5. Entidades Bancarias")
         print("6. Direcciones de Envío")
-        print("7. Empresas")
-        print("8. Volver al Menú Principal")
+        print("7. Volver al Menú Principal")
 
         opcion = input("Seleccione una opción: ")
         
         if opcion == "1":
             submenu_tabla("Clientes")
         elif opcion == "2":
-            submenu_tabla("Productos")
+            submenu_tabla("Codigo Postal")
         elif opcion == "3":
-            submenu_tabla("Provincias")
+            submenu_tabla("Población")
         elif opcion == "4":
-            submenu_tabla("Entidades Bancarias")
+            submenu_tabla("Provincias")
         elif opcion == "5":
-            submenu_tabla("Códigos Postales")
+            submenu_tabla("Entidades Bancarias")
         elif opcion == "6":
             submenu_tabla("Direcciones de Envío")
         elif opcion == "7":
-            submenu_tabla("Empresas")
-        elif opcion == "8":
             break
         else:
             print("Opción inválida. Por favor, seleccione una opción válida.")

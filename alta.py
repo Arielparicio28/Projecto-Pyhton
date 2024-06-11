@@ -11,11 +11,12 @@ def alta(tabla):
         nif = input("Introduce tu Nif/Nie ")
         direccion = input("Introduce tu dirección")
         codigoPostal = input("Introduce tu codigo postal")
+        poblacion = input("Introduce la poblacion en la que vivas")
         provincia = input("Introduce tu provinica")
        
  
-        sql = "INSERT INTO cliente (nombre, apellido, nif_nie, direccion, codigopostal, provincia) VALUES (%s, %s,%s,%s,%s,%s)"
-        valores = (nombre, apellido, nif, direccion, codigoPostal, provincia)
+        sql = "INSERT INTO cliente (nombre, apellido, nif_nie, direccion, cp, poblacion, provincia) VALUES (,%%s, %s,%s,%s,%s,%s)"
+        valores = (nombre, apellido, nif, direccion, codigoPostal,poblacion, provincia)
         cursor.execute(sql, valores)
         conexion.commit()
         print("Cliente agregado exitosamente.")
@@ -78,7 +79,7 @@ def alta(tabla):
             poblacionenvio = input("Escriba la poblacion de envio: ")
             provinciaenvio = input("Escriba la provincia de envio: ")
 
-            sql = "INSERT INTO direccionenvio (codigo_postal, poblacion, provincia) VALUES (%s, %s, %s)"
+            sql = "INSERT INTO direccionenvio (cp, poblacion, provincia) VALUES (%s, %s, %s)"
             val = (codigoPosenvio, poblacionenvio, provinciaenvio )
             conexion.execute(sql, val)
             conexion.commit()

@@ -10,7 +10,7 @@ def obtener_datos_empresa():
         "nombre": "Nombre de la Empresa",
         "cif_nie": "CIF_NIE de la Empresa",
         "direccion": "Dirección de la Empresa",
-        "codigoPostal": "Código Postal de la Empresa",
+        "cpgit ": "Código Postal de la Empresa",
         "provincia": "Provincia de la Empresa"
 
     }

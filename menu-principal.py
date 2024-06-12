@@ -7,7 +7,7 @@ def conectar():
         host="localhost",
         user="root",
         password="",
-        database="datos"  # Especifica el nombre de tu base de datos aquí
+        database="datos2"  # Especifica el nombre de tu base de datos aquí
     )
 
 # Función para limpiar la pantalla

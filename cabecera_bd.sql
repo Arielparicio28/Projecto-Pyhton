@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de datos: `datos2`
+-- Base de datos: `datos_2`
 --
 
 -- --------------------------------------------------------
@@ -78,7 +78,6 @@ CREATE TABLE `codigopostal` (
 --
 
 CREATE TABLE `direccionenvio` (
-  `id_envio` int(11) NOT NULL,
   `cp` varchar(5) NOT NULL,
   `poblacion` varchar(35) NOT NULL,
   `provincia` varchar(35) NOT NULL
@@ -109,13 +108,11 @@ CREATE TABLE `vendedor` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `lineasfactura`
+-- Estructura de tabla para la tabla `lineas_factura`
 --
 
-CREATE TABLE `lineasfactura` (
-  `id_factura` int(11) NOT NULL,
-  `fecha` date NOT NULL,
-  `codigo_producto` varchar(11) NOT NULL,
+CREATE TABLE `lineas_factura` (
+  `descripcion` varchar(100) NOT NULL,
   `cantidad` varchar(11) NOT NULL,
   `precio_unitario` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -145,15 +142,6 @@ CREATE TABLE `productos` (
   `precio_unitario` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- -- Volcado de datos para la tabla `productos`
--- --
-
--- INSERT INTO `productos` (`codigo_producto`, `descripcion`, `cantidad`, `precio_unitario`) VALUES
--- ('1', 'CAMISETAS', '1', 10.00),
--- ('2', 'PANTALONES', '2', 25.00),
--- ('3', 'ZAPATOS', '3', 35.00);
-
 -- --------------------------------------------------------
 
 --
@@ -163,6 +151,42 @@ CREATE TABLE `productos` (
 CREATE TABLE `provincias` (
   `codigo` varchar(2) NOT NULL,
   `descripción` varchar(35) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Estructura de tabla para la tabla `provincias`
+--
+
+CREATE TABLE `cabecera` (
+--   vendedor
+  `nombre` varchar(35) NOT NULL,
+  'direccion' varchar(50) NOT NULL,
+  'cp' varchar(5) NOT NULL,
+  'poblacion' varchar(35) NOT NULL,
+  'provincia' varchar(35) NOT NULL,
+  -- cliente
+  `nombre` varchar(35) NOT NULL,
+  `apellido` varchar(35) NOT NULL,
+  'direccion' varchar(50) NOT NULL,
+  'cp' varchar(5) NOT NULL,
+  'poblacion' varchar(35) NOT NULL,
+  'provincia' varchar(35) NOT NULL,
+  -- direccionenvio
+    `nombre` varchar(35) NOT NULL,
+    `apellido` varchar(35) NOT NULL,
+    'direccion' varchar(50) NOT NULL,
+    'cp' varchar(5) NOT NULL,
+    'poblacion' varchar(35) NOT NULL,
+    'provincia' varchar(35) NOT NULL,
+    -- bancos
+    'nombre_entidad' varchar(50) NOT NULL,
+    'codigo_iban' varchar(34) NOT NULL,
+    'codigo_swift' varchar(11) NOT NULL,
+    -- datos
+    `numero_factura` varchar(11) NOT NULL,
+    `fecha` date NOT NULL,
+
+
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -200,10 +224,10 @@ ALTER TABLE `vendedor`
   ADD PRIMARY KEY (`cif`);
 
 --
--- Indices de la tabla `lineasfactura`
+-- Indices de la tabla `lineas_factura`
 --
-ALTER TABLE `lineasfactura`
-  ADD PRIMARY KEY (`id_factura`);
+ALTER TABLE `lineas_factura`
+  ADD PRIMARY KEY (`numero_factura`);
 
 --
 -- Indices de la tabla `poblacion`
@@ -223,22 +247,6 @@ ALTER TABLE `productos`
 --
 ALTER TABLE `provincias`
   ADD PRIMARY KEY (`codigo`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `direccionenvio`
---
-ALTER TABLE `direccionenvio`
-  MODIFY `id_envio` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `lineasfactura`
---
-ALTER TABLE `lineasfactura`
-  MODIFY `id_factura` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Restricciones para tablas volcadas
@@ -269,10 +277,9 @@ ALTER TABLE `direccionenvio`
   ADD CONSTRAINT `fk_provincia_provincias` FOREIGN KEY (`provincia`) REFERENCES `provincias` (`codigo`);
 
 --
--- Filtros para la tabla `lineasfactura`
+-- Filtros para la tabla `lineas_factura`
 --
-ALTER TABLE `lineasfactura`
-  ADD CONSTRAINT `fk_cliente_codigo_cliente` FOREIGN KEY (`codigo_cliente`) REFERENCES `cliente` (`codigo_cliente`),
+ALTER TABLE `lineas_factura`
   ADD CONSTRAINT `fk_productos_codigo_producto` FOREIGN KEY (`codigo_producto`) REFERENCES `productos` (`codigo_producto`),
   ADD CONSTRAINT `fk_productos_precio_unitario` FOREIGN KEY (`precio_unitario`) REFERENCES `productos` (`precio_unitario`);
 --
@@ -288,6 +295,8 @@ ALTER TABLE `poblacion`
 ALTER TABLE `provincias`
   ADD CONSTRAINT `fk_codigopostal` FOREIGN KEY (`codigo`) REFERENCES `codigopostal` (`codigo`),
 COMMIT;
+
+-- ADD CONSTRAINT `fk_cliente_codigo_cliente` FOREIGN KEY (`codigo_cliente`) REFERENCES `cliente` (`codigo_cliente`),
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

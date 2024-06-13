@@ -141,7 +141,6 @@ CREATE TABLE `cabecera` (
     `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-
 -- Índices para tablas volcadas
 
 -- Indices de la tabla `bancos`
@@ -176,7 +175,6 @@ ALTER TABLE `poblacion`
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`codigo_producto`),
   ADD UNIQUE (`precio_unitario`);
-
 
 -- Indices de la tabla `provincias`
 

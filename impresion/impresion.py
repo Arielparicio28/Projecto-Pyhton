@@ -173,7 +173,7 @@ def imprimir():
     productos = obtener_datos_productos(nif_cliente)
     total_general, total_con_iva = calcular_total_general(productos)
  
-    create_invoice('/mnt/data/factura.pdf', '/mnt/data/logo.png', datos_cliente, productos, total_general, total_con_iva)
+    create_invoice('factura.pdf', 'logo.png', datos_cliente, productos, total_general, total_con_iva)
 
 # Ejecutar la función para generar la factura
 

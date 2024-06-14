@@ -153,6 +153,10 @@ def imprimir():
     
      # Generar el PDF
     pdf_content = create_invoice(obtener_datos_empresa, datos_cliente, productos, total_general, total_con_iva)
+ 
+   # create_invoice('factura.pdf', 'logo.png', datos_cliente, productos, total_general, total_con_iva)
+
+# Ejecutar la función para generar la factura
 
     # Guardar el PDF en la base de datos
     guardar_factura_en_bd(nif_cliente, pdf_content)

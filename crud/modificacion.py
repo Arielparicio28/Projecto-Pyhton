@@ -1,12 +1,16 @@
-def hola():
-    print("Hola MUndo")
-    
+import sys
+import os
+
+
+ruta_conexion_bd = os.path.abspath(os.path.join(os.path.dirname(__file__),"..","conexion"))
+sys.path.append(ruta_conexion_bd)
+from conexion_bd import obtener_conexion
+
 def modificacion(tabla):
-    limpiar_pantalla()
-    conexion = conectar()
+    conexion = obtener_conexion()
     cursor = conexion.cursor()
 
-    if tabla == "Clientes":
+    if tabla == "1":
         id_cliente = input("Ingrese el ID del cliente a modificar: ")
         nombre = input("Ingrese el nombre del cliente: ")
         apellido = input("Ingrese el apellido del cliente: ")
@@ -21,7 +25,7 @@ def modificacion(tabla):
         conexion.commit()
         print("Cliente modificado exitosamente.")
     
-    elif tabla == "CodigosPostales":
+    if tabla == "2":
         id_codigo_postal = input("Ingrese el ID del código postal a modificar: ")
         codigo = input("Escriba un código postal: ")
         descripcion = input("Escriba una descripción: ")
@@ -32,7 +36,7 @@ def modificacion(tabla):
         conexion.commit()
         print("Código postal modificado exitosamente.")
     
-    elif tabla == "Poblaciones":
+    if tabla == "3":
         id_poblacion = input("Ingrese el ID de la población a modificar: ")
         codigoP = input("Escriba un código postal: ")
         descripcionP = input("Escriba una descripción: ")
@@ -43,7 +47,7 @@ def modificacion(tabla):
         conexion.commit()
         print("Población modificada exitosamente.")
     
-    elif tabla == "Provincias":
+    if tabla == "4":
         id_provincia = input("Ingrese el ID de la provincia a modificar: ")
         codigoPro = input("Escriba un código postal: ")
         descripcionPro = input("Escriba una descripción: ")
@@ -54,7 +58,7 @@ def modificacion(tabla):
         conexion.commit()
         print("Provincia modificada exitosamente.")
     
-    elif tabla == "Bancos":
+    if tabla == "5":
         id_banco = input("Ingrese el ID del banco a modificar: ")
         nombreBanco = input("Escriba el nombre de su banco: ")
         iban = input("Escriba el número de cuenta: ")
@@ -66,7 +70,7 @@ def modificacion(tabla):
         conexion.commit()
         print("Banco modificado exitosamente.")
     
-    elif tabla == "DireccionesEnvio":
+    if tabla == "6":
         id_direccion_envio = input("Ingrese el ID de la dirección de envío a modificar: ")
         codigoPosenvio = input("Escriba el código postal de envío: ")
         poblacionenvio = input("Escriba la población de envío: ")

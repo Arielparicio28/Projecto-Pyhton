@@ -4,16 +4,15 @@ from reportlab.lib import colors
 from reportlab.lib.units import mm
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Image
 from reportlab.lib.styles import getSampleStyleSheet
-import mysql.connector
- 
-def conectar():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="datos2"
-    )
- 
+
+import sys
+import os
+
+
+ruta_conexion_bd = os.path.abspath(os.path.join(os.path.dirname(__file__),"..","conexion"))
+sys.path.append(ruta_conexion_bd)
+from conexion_bd import obtener_conexion
+
 def obtener_datos_empresa():
     return {
         "nombre": "Nombre de la Empresa",
@@ -22,9 +21,9 @@ def obtener_datos_empresa():
         "codigo_postal": "Código Postal de la Empresa",
         "provincia": "Provincia de la Empresa"
     }
- 
+
 def obtener_datos_cliente(nif):
-    conexion = conectar()
+    conexion = obtener_conexion()
     cursor = conexion.cursor()
     sql = "SELECT nombre, apellido, direccion, cp, provincia FROM cliente WHERE nif_nie = %s"
     cursor.execute(sql, (nif,))
@@ -41,9 +40,9 @@ def obtener_datos_cliente(nif):
         }
     else:
         raise ValueError("No se encontraron datos suficientes para el cliente con NIF/NIE proporcionado.")
- 
+
 def obtener_datos_productos(nif):
-    conexion = conectar()
+    conexion = obtener_conexion()
     cursor = conexion.cursor()
     sql = """
     SELECT c.nombre, fp.cantidad, p.precio_unitario, (fp.cantidad * p.precio_unitario) AS total
@@ -58,15 +57,15 @@ def obtener_datos_productos(nif):
     cursor.close()
     conexion.close()
     return [{"producto": row[0], "cantidad": row[1], "precio_unitario": row[2], "total": row[3]} for row in productos]
- 
+
 def calcular_total_general(productos):
     total_general = sum(producto['total'] for producto in productos)
     return total_general, total_general * 1.21  # 21% IVA
- 
+
 def create_invoice(pdf_path, logo_path, datos_cliente, productos, total_general, total_con_iva):
     datos_empresa = obtener_datos_empresa()
     fecha_factura = datetime.now().strftime("%d/%m/%Y")
- 
+
     # Configuración del documento
     doc = SimpleDocTemplate(pdf_path, pagesize=A4, rightMargin=20*mm, leftMargin=20*mm, topMargin=20*mm, bottomMargin=20*mm)
     elements = []
@@ -163,8 +162,8 @@ def create_invoice(pdf_path, logo_path, datos_cliente, productos, total_general,
     # Construcción del documento
     doc.build(elements)
  
-def facturacion():
-    datos_empresa = obtener_datos_empresa()
+def imprimir():
+    obtener_datos_empresa()
     nif_cliente = input("Introduce el NIF/NIE del cliente: ")
     try:
         datos_cliente = obtener_datos_cliente(nif_cliente)
@@ -175,7 +174,7 @@ def facturacion():
     total_general, total_con_iva = calcular_total_general(productos)
  
     create_invoice('/mnt/data/factura.pdf', '/mnt/data/logo.png', datos_cliente, productos, total_general, total_con_iva)
- 
+
 # Ejecutar la función para generar la factura
-facturacion()
+
 

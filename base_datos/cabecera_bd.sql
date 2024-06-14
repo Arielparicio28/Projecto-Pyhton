@@ -107,11 +107,14 @@ CREATE TABLE `productos` (
 
 CREATE TABLE `provincias` (
   `codigo` varchar(2) NOT NULL,
-  `descripción` varchar(35) NOT NULL
+  `descripcion` varchar(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Estructura de tabla para la tabla `cabecera`
 CREATE TABLE `cabecera` (
+  -- datos
+    `numero_factura` varchar(11) NOT NULL,
+    `fecha` date NOT NULL
     -- vendedor
     `vendedor_nombre` varchar(35) NOT NULL,
     `vendedor_direccion` varchar(50) NOT NULL,
@@ -136,9 +139,6 @@ CREATE TABLE `cabecera` (
     `nombre_entidad` varchar(50) NOT NULL,
     `codigo_iban` varchar(34) NOT NULL,
     `codigo_swift` varchar(11) NOT NULL,
-    -- datos
-    `numero_factura` varchar(11) NOT NULL,
-    `fecha` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Índices para tablas volcadas
@@ -162,6 +162,10 @@ ALTER TABLE `direccionenvio`
 -- Indices de la tabla `vendedor`
 ALTER TABLE `vendedor`
   ADD PRIMARY KEY (`cif`);
+
+-- Indices de la tabla `cabecera`
+ALTER TABLE `cabecera`
+  ADD PRIMARY KEY (`numero_factura`);
 
 -- Indices de la tabla `lineas_factura`
 ALTER TABLE `lineas_factura`

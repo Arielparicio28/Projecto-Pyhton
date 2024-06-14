@@ -1,7 +1,12 @@
 from datetime import datetime
 
-def limpiar_pantalla():
-    print("\033[H\033[J", end="")
+import sys
+import os
+
+ruta_conexion_bd = os.path.abspath(os.path.join(os.path.dirname(__file__),"..","conexion"))
+sys.path.append(ruta_conexion_bd)
+from conexion_bd import cerrar, obtener_conexion
+
 
 
 def obtener_datos_empresa():
@@ -16,7 +21,7 @@ def obtener_datos_empresa():
     }
 
 def obtener_datos_cliente(nif):
-    conexion = conectar()
+    conexion = obtener_conexion()
     cursor = conexion.cursor()
     sql = "SELECT nombre, apellido, direccion, codigopostal, provincia FROM cliente WHERE nif_nie = %s"
     cursor.execute(sql, (nif,))
@@ -32,7 +37,7 @@ def obtener_datos_cliente(nif):
     }
 
 def obtener_precio_unitario(producto):
-    conexion = conectar()
+    conexion = obtener_conexion()
     cursor = conexion.cursor()
     sql = "SELECT precio_unitario FROM productos WHERE nombre = %s"
     cursor.execute(sql, (producto,))
@@ -66,7 +71,6 @@ def calcular_total_general(productos):
     return total_general, total_general * 1.21  # 21% IVA
 
 def facturacion():
-    limpiar_pantalla()
     datos_empresa = obtener_datos_empresa()
     nif_cliente = input("Introduce el NIF/NIE del cliente: ")
     datos_cliente = obtener_datos_cliente(nif_cliente)
@@ -94,4 +98,4 @@ def facturacion():
     input("\nPresione Enter para continuar...")
 
 # Ejecutar la función para generar la factura
-facturacion()
+

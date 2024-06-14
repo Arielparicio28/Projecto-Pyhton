@@ -1,38 +1,49 @@
-import mysql.connector
+import sys
 import os
 
-# Función para conectar a la base de datos
-def conectar():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="",
-        database="datos2"  # Especifica el nombre de tu base de datos aquí
-    )
 
-# Función para limpiar la pantalla
-def limpiar_pantalla():
-    os.system('cls' if os.name == 'nt' else 'clear')
+ruta_conexion_bd = os.path.abspath(os.path.join(os.path.dirname(__file__),"..","conexion"))
+sys.path.append(ruta_conexion_bd)
+
+from conexion_bd import cerrar,obtener_conexion
+
+ruta_crud = os.path.abspath(os.path.join(os.path.dirname(__file__),"..","crud"))
+sys.path.append(ruta_crud)
+
+from alta import alta
+from modificacion import modificacion
+from baja import baja
+from consultas import consultas
+
+ruta_facturacion = os.path.abspath(os.path.join(os.path.dirname(__file__),"..","facturacion"))
+sys.path.append(ruta_facturacion)
+
+from facturacion import facturacion
+
+
+ruta_impresion = os.path.abspath(os.path.join(os.path.dirname(__file__),"..","impresion"))
+sys.path.append(ruta_impresion)
+
+from impresion import imprimir
 
 # Función para mostrar el menú principal
 def menu_principal():
     while True:
-        limpiar_pantalla()
         print("\nMenú Principal:")
         print("1. Mantenimiento")
         print("2. Facturación")
-        print("3. Impresión de la Facturación")
+        print("3. Impresión")
         print("4. Salir")
         
         opcion = input("Seleccione una opción: ")
         
         if opcion == "1":
             menu_mantenimiento()
-        elif opcion == "2":
-            menu_facturacion()
-        elif opcion == "3":
-            menu_impresion_facturacion()
-        elif opcion == "4":
+        if opcion == "2":
+            facturacion()
+        if opcion == "3":
+            imprimir()
+        if opcion == "4":
             print("Saliendo del programa...")
             break
         else:
@@ -40,12 +51,11 @@ def menu_principal():
 
 # Función para mostrar el menú de mantenimiento
 def menu_mantenimiento():
-    while True:
-        limpiar_pantalla()
+    while True: 
         print("\nMenú Mantenimiento:")
         print("1. Clientes")
         print("2. Codigo Postal")
-        print("3. POblacion")
+        print("3. Poblacion")
         print("4. Provincias")
         print("5. Entidades Bancarias")
         print("6. Direcciones de Envío")
@@ -55,17 +65,17 @@ def menu_mantenimiento():
         
         if opcion == "1":
             submenu_tabla("Clientes")
-        elif opcion == "2":
+        if opcion == "2":
             submenu_tabla("Codigo Postal")
-        elif opcion == "3":
+        if opcion == "3":
             submenu_tabla("Población")
-        elif opcion == "4":
+        if opcion == "4":
             submenu_tabla("Provincias")
-        elif opcion == "5":
+        if opcion == "5":
             submenu_tabla("Entidades Bancarias")
-        elif opcion == "6":
+        if opcion == "6":
             submenu_tabla("Direcciones de Envío")
-        elif opcion == "7":
+        if opcion == "7":
             break
         else:
             print("Opción inválida. Por favor, seleccione una opción válida.")
@@ -73,25 +83,27 @@ def menu_mantenimiento():
 # Función para mostrar el submenú de una tabla específica
 def submenu_tabla(tabla):
     while True:
-        limpiar_pantalla()
         print(f"\nMenú {tabla}:")
         print("1. Alta")
         print("2. Baja")
         print("3. Modificación")
         print("4. Consulta")
         print("5. Volver al Menú Mantenimiento")
-
+        
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
-            alta(tabla)
-        elif opcion == "2":
-            baja(tabla)
-        elif opcion == "3":
-            modificacion(tabla)
-        elif opcion == "4":
-            consulta(tabla)
-        elif opcion == "5":
+            alta(opcion)
+        if opcion == "2":
+            baja(opcion)
+        if opcion == "3":
+            modificacion(opcion)
+        if opcion == "4":
+            consultas(opcion)
+        if opcion == "5":
             break
         else:
             print("Opción inválida. Por favor, seleccione una opción válida.")
+
+if __name__ == '__main__':
+    menu_principal()

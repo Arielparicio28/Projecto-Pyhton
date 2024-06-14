@@ -93,13 +93,13 @@ def submenu_tabla(tabla):
         opcion = input("Seleccione una opción: ")
 
         if opcion == "1":
-            alta(opcion)
+            alta(tabla)
         if opcion == "2":
-            baja(opcion)
+            baja(tabla)
         if opcion == "3":
-            modificacion(opcion)
+            modificacion(tabla)
         if opcion == "4":
-            consultas(opcion)
+            consultas(tabla)
         if opcion == "5":
             break
         else:

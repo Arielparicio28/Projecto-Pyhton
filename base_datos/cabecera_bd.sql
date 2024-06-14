@@ -31,6 +31,7 @@ CREATE TABLE `bancos` (
 -- Estructura de tabla para la tabla `cliente`
 
 CREATE TABLE `cliente` (
+   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `codigo_cliente` varchar(11) NOT NULL,
   `nombre` varchar(35) NOT NULL,
   `apellido` varchar(35) NOT NULL,
@@ -66,6 +67,7 @@ CREATE TABLE `direccionenvio` (
 -- Estructura de tabla para la tabla `vendedor`
 
 CREATE TABLE `vendedor` (
+   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `nombre` varchar(35) NOT NULL,
   `cif` varchar(10) NOT NULL,
   `direccion` varchar(35) NOT NULL,
@@ -84,7 +86,10 @@ CREATE TABLE `vendedor` (
 CREATE TABLE `lineas_factura` (
   `descripcion` varchar(100) NOT NULL,
   `cantidad` varchar(11) NOT NULL,
-  `precio_unitario` decimal(10,2) NOT NULL
+  `precio_unitario` decimal(10,2) NOT NULL,
+  `subtotal` decimal(10,2) NOT NULL,
+  `iva` decimal(2,2) NOT NULL,
+  `total` decimal(10,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Estructura de tabla para la tabla `poblacion`
@@ -97,6 +102,7 @@ CREATE TABLE `poblacion` (
 -- Estructura de tabla para la tabla `productos`
 
 CREATE TABLE `productos` (
+   `id` INT AUTO_INCREMENT PRIMARY KEY,
   `codigo_producto` varchar(11) NOT NULL,
   `descripcion` varchar(100) NOT NULL,
   `cantidad` varchar(11) NOT NULL,
@@ -110,11 +116,35 @@ CREATE TABLE `provincias` (
   `descripcion` varchar(35) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--Estructura Factura tabla
+CREATE TABLE factura (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    codigo_cliente INT,
+    fecha DATE,
+    FOREIGN KEY (codigo_cliente) REFERENCES cliente(id)
+);
+
+CREATE TABLE facturas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_nif VARCHAR(50),
+    fecha_factura DATE,
+    pdf LONGBLOB
+);
+
+--Cabecera Ariel
+CREATE TABLE cabecera (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_factura INT,
+    codigo_producto INT,
+    cantidad INT,
+    FOREIGN KEY (id_factura) REFERENCES factura(id),
+    FOREIGN KEY (codigo_producto) REFERENCES productos(id)
+);
 -- Estructura de tabla para la tabla `cabecera`
 CREATE TABLE `cabecera` (
   -- datos
     `numero_factura` varchar(11) NOT NULL,
-    `fecha` date NOT NULL
+    `fecha` date NOT NULL,
     -- vendedor
     `vendedor_nombre` varchar(35) NOT NULL,
     `vendedor_direccion` varchar(50) NOT NULL,
@@ -138,7 +168,7 @@ CREATE TABLE `cabecera` (
     -- bancos
     `nombre_entidad` varchar(50) NOT NULL,
     `codigo_iban` varchar(34) NOT NULL,
-    `codigo_swift` varchar(11) NOT NULL,
+    `codigo_swift` varchar(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- Índices para tablas volcadas

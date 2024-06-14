@@ -9,8 +9,8 @@ from conexion_bd import obtener_conexion
 def modificacion(tabla):
     conexion = obtener_conexion()
     cursor = conexion.cursor()
-
-    if tabla == "1":
+    #Clientes
+    if tabla == "Clientes":
         id_cliente = input("Ingrese el ID del cliente a modificar: ")
         nombre = input("Ingrese el nombre del cliente: ")
         apellido = input("Ingrese el apellido del cliente: ")
@@ -24,8 +24,8 @@ def modificacion(tabla):
         cursor.execute(sql, valores)
         conexion.commit()
         print("Cliente modificado exitosamente.")
-    
-    if tabla == "2":
+    #Codigo Postal
+    if tabla == "Codigo Postal":
         id_codigo_postal = input("Ingrese el ID del código postal a modificar: ")
         codigo = input("Escriba un código postal: ")
         descripcion = input("Escriba una descripción: ")
@@ -35,8 +35,8 @@ def modificacion(tabla):
         cursor.execute(sql, valores)
         conexion.commit()
         print("Código postal modificado exitosamente.")
-    
-    if tabla == "3":
+    #Poblacion
+    if tabla == "Poblacion":
         id_poblacion = input("Ingrese el ID de la población a modificar: ")
         codigoP = input("Escriba un código postal: ")
         descripcionP = input("Escriba una descripción: ")
@@ -46,8 +46,8 @@ def modificacion(tabla):
         cursor.execute(sql, valores)
         conexion.commit()
         print("Población modificada exitosamente.")
-    
-    if tabla == "4":
+    #Provincias
+    if tabla == "Provincias":
         id_provincia = input("Ingrese el ID de la provincia a modificar: ")
         codigoPro = input("Escriba un código postal: ")
         descripcionPro = input("Escriba una descripción: ")
@@ -57,8 +57,8 @@ def modificacion(tabla):
         cursor.execute(sql, valores)
         conexion.commit()
         print("Provincia modificada exitosamente.")
-    
-    if tabla == "5":
+    #Entidades Bancarias
+    if tabla == "Entidades Bancarias":
         id_banco = input("Ingrese el ID del banco a modificar: ")
         nombreBanco = input("Escriba el nombre de su banco: ")
         iban = input("Escriba el número de cuenta: ")
@@ -69,8 +69,8 @@ def modificacion(tabla):
         cursor.execute(sql, valores)
         conexion.commit()
         print("Banco modificado exitosamente.")
-    
-    if tabla == "6":
+    #Direccion de envío
+    if tabla == "Direcciones de Envío":
         id_direccion_envio = input("Ingrese el ID de la dirección de envío a modificar: ")
         codigoPosenvio = input("Escriba el código postal de envío: ")
         poblacionenvio = input("Escriba la población de envío: ")

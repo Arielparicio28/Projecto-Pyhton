@@ -11,19 +11,25 @@ from conexion_bd import cerrar, obtener_conexion
 
 def obtener_datos_empresa():
     # Datos de la empresa (puedes modificar estos datos según sea necesario)
-    return {
-        "nombre": "Nombre de la Empresa",
-        "cif_nie": "CIF_NIE de la Empresa",
-        "direccion": "Dirección de la Empresa",
-        "cpgit ": "Código Postal de la Empresa",
-        "provincia": "Provincia de la Empresa"
+    conexion = obtener_conexion()
+    cursor = conexion.cursor()
+    sql = "SELECT * FROM vendedor"
+    cursor.execute(sql)
+    resultado = cursor.fetchall()
+    for empresa in resultado:
+        return {
+        "Nombre-Empresa": empresa[1],
+        "CIF": empresa[2],
+        "DirecciÓn": empresa[3],
+        "Codigo-Postal": empresa[4],
+        "Provincia": empresa[5]
 
     }
 
 def obtener_datos_cliente(nif):
     conexion = obtener_conexion()
     cursor = conexion.cursor()
-    sql = "SELECT nombre, apellido, direccion, codigopostal, provincia FROM cliente WHERE nif_nie = %s"
+    sql = "SELECT nombre, apellido, direccion, cp, provincia FROM cliente WHERE nif_nie = %s"
     cursor.execute(sql, (nif,))
     resultado = cursor.fetchone()
     cursor.close()
@@ -39,7 +45,7 @@ def obtener_datos_cliente(nif):
 def obtener_precio_unitario(producto):
     conexion = obtener_conexion()
     cursor = conexion.cursor()
-    sql = "SELECT precio_unitario FROM productos WHERE nombre = %s"
+    sql = "SELECT precio_unitario FROM productos WHERE descripcion = %s"
     cursor.execute(sql, (producto,))
     resultado = cursor.fetchone()
     cursor.close()
@@ -49,8 +55,8 @@ def obtener_precio_unitario(producto):
 def obtener_datos_productos():
     productos = []
     while True:
-        producto = input("Ingrese el nombre del producto (o 'fin' para terminar): ")
-        if producto.lower() == 'fin':
+        producto = input("Ingrese el nombre del producto (o 'f' para terminar): ")
+        if producto.lower() == 'f':
             break
         cantidad = int(input(f"Ingrese la cantidad de {producto}: "))
         precio_unitario = obtener_precio_unitario(producto)
@@ -67,7 +73,7 @@ def obtener_datos_productos():
     return productos
 
 def calcular_total_general(productos):
-    total_general = sum(producto['total'] for producto in productos)
+    total_general = float(sum(producto['total'] for producto in productos))
     return total_general, total_general * 1.21  # 21% IVA
 
 def facturacion():
@@ -97,5 +103,4 @@ def facturacion():
 
     input("\nPresione Enter para continuar...")
 
-# Ejecutar la función para generar la factura
 

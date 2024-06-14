@@ -18,7 +18,7 @@ def baja(tabla):
         cursor = conexion.cursor()
  
     # Tabla Clientes
-        if tabla == "1":
+        if tabla == "Clientes":
             nif = input("Introduce el Nif/Nie del cliente a eliminar: ")
             sql = "DELETE FROM cliente WHERE nif_nie = %s"
             valores = (nif,)
@@ -27,7 +27,7 @@ def baja(tabla):
             print("Cliente eliminado exitosamente.")
     
     # Tabla código postal
-        if tabla == "2":
+        if tabla == "Codigo Postal":
             codigo = input("Escriba el código postal a eliminar: ")
             sql = "DELETE FROM codigopostal WHERE codigo = %s"
             valores = (codigo,)
@@ -36,7 +36,7 @@ def baja(tabla):
             print("Código postal eliminado correctamente.")
     
     # Tabla población
-        if tabla == "3":
+        if tabla == "Poblacion":
             codigoP = input("Escriba el código postal de la población a eliminar: ")
             sql = "DELETE FROM poblacion WHERE codigo = %s"
             valores = (codigoP,)
@@ -45,7 +45,7 @@ def baja(tabla):
             print("Población eliminada correctamente.")
 
     # Tabla provincias
-        if tabla == "4":
+        if tabla == "Provincias":
             codigoPro = input("Escriba el código postal de la provincia a eliminar: ")
             sql = "DELETE FROM provincias WHERE codigo = %s"
             valores = (codigoPro,)
@@ -54,7 +54,7 @@ def baja(tabla):
             print("Provincia eliminada correctamente.")
     
     # Tabla banco
-        if tabla == "5":
+        if tabla == "Entidades Bancarias":
             iban = input("Escriba el número de cuenta (IBAN) del banco a eliminar: ")
             sql = "DELETE FROM bancos WHERE codigo_iban = %s"
             valores = (iban,)
@@ -63,7 +63,7 @@ def baja(tabla):
             +print("Banco eliminado correctamente.")
 
     # Tabla dirección de envío
-        if tabla == "6":
+        if tabla == "Direcciones de Envío":
             codigoPosenvio = input("Escriba el código postal de envío a eliminar: ")
             sql = "DELETE FROM direccionenvio WHERE codigo_postal = %s"
             valores = (codigoPosenvio,)

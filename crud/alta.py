@@ -17,23 +17,24 @@ def alta(tabla):
         cursor = conexion.cursor()
 
         # Tabla Clientes
-        if tabla == "1":
+        if tabla == "Clientes":
+            codigo_cliente = input("Codigo de cliente: ")
             nombre = input("Ingrese el nombre del cliente: ")
             apellido = input("Ingrese el apellido del cliente: ")
-            nif = input("Introduce tu NIF/NIE: ")
+            nif_nie = input("Introduce tu NIF/NIE: ")
             direccion = input("Introduce tu dirección: ")
             codigoPostal = input("Introduce tu código postal: ")
             poblacion = input("Introduce la población en la que vives: ")
             provincia = input("Introduce tu provincia: ")
 
-            sql = "INSERT INTO cliente (nombre, apellido, nif_nie, direccion, cp, poblacion, provincia) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-            valores = (nombre, apellido, nif, direccion, codigoPostal, poblacion, provincia)
+            sql = "INSERT INTO cliente (codigo_cliente,nombre, apellido, nif_nie, direccion, cp, poblacion, provincia) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"
+            valores = (codigo_cliente,nombre, apellido, nif_nie, direccion, codigoPostal, poblacion, provincia)
             cursor.execute(sql, valores)
             conexion.commit()
             print("Cliente agregado exitosamente.")
 
         # Tabla Código Postal
-        if tabla == "2":
+        if tabla == "Codigo Postal":
             codigo = input("Escriba un código postal: ")
             descripcion = input("Escriba una descripción: ")
 
@@ -44,7 +45,7 @@ def alta(tabla):
             print("Datos introducidos correctamente.")
 
         # Tabla Población
-        if tabla == "3":
+        if tabla == "Poblacion":
             codigo = input("Escriba un código postal: ")
             descripcion = input("Escriba una descripción: ")
 
@@ -55,8 +56,8 @@ def alta(tabla):
             print("Datos introducidos correctamente.")
 
         # Tabla Provincias
-        if tabla == "4":
-            codigo = input("Escriba un código postal: ")
+        if tabla == "Provincias":
+            codigo = input("Codigo de provincia: ")
             descripcion = input("Escriba una descripción: ")
 
             sql = "INSERT INTO provincias (codigo, descripcion) VALUES (%s, %s)"
@@ -66,19 +67,20 @@ def alta(tabla):
             print("Datos introducidos correctamente.")
 
         # Tabla Banco
-        if tabla == "5":
+        if tabla == "Entidades Bancarias":
+            codigo = input("escriba el codigo de su banco: ")
             nombreBanco = input("Escriba el nombre de su banco: ")
             iban = input("Escriba el número de cuenta: ")
             swift = input("Escriba el código internacional: ")
 
-            sql = "INSERT INTO bancos (nombre_entidad, codigo_iban, codigo_swift) VALUES (%s, %s, %s)"
-            val = (nombreBanco, iban, swift)
+            sql = "INSERT INTO bancos (codigo_banco,nombre_entidad, codigo_iban, codigo_swift) VALUES (%s,%s, %s, %s)"
+            val = (codigo,nombreBanco, iban, swift)
             cursor.execute(sql, val)
             conexion.commit()
             print("Datos introducidos correctamente.")
 
         # Tabla Dirección Envío
-        if tabla == "6":
+        if tabla == "Direcciones de Envío":
             codigoPosenvio = input("Escriba el código de envío: ")
             poblacionenvio = input("Escriba la población de envío: ")
             provinciaenvio = input("Escriba la provincia de envío: ")

@@ -18,11 +18,11 @@ def obtener_datos_empresa():
     resultado = cursor.fetchall()
     for empresa in resultado:
         return {
-        "Nombre-Empresa": empresa[1],
-        "CIF": empresa[2],
-        "DirecciÓn": empresa[3],
-        "Codigo-Postal": empresa[4],
-        "Provincia": empresa[5]
+        "Nombre-Empresa": empresa[0],
+        "CIF": empresa[1],
+        "DirecciÓn": empresa[2],
+        "Codigo-Postal": empresa[3],
+        "Provincia": empresa[4]
 
     }
 
